@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "Poziomica 1.0-cache")(type Legacy)(uri "C:/Users/wiki1/Documents/kicad/Poziomica 1.0/Poziomica 1.0-cache.lib")(options "")(descr ""))
+  (lib (name Poziomica-1.0-rescue)(type Legacy)(uri "${KIPRJMOD}/Poziomica 1.0-rescue.lib")(options "")(descr ""))
+)
