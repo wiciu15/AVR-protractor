@@ -9,4 +9,6 @@ Firmware is working, but some extra features are still WIP (@TODO in main.c)
 
 Display driver made by @tibounise (https://github.com/tibounise/SSD1306-AVR) slightly modified by me to save RAM for framebuffer.
 
-![3d front](https://i.imgur.com/3AsYZgu.png)
+![3d front](https://i.imgur.com/3AsYZgu.png?1)
+
+![3d PCB](https://i.imgur.com/TRDBjdy.png)
