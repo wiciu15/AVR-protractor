@@ -92,38 +92,41 @@ int main(void)
 			int16_t Zavg=sumZ/samplesToAvg;
 						 
 			//reset values
-			n=0;   
-			sumZ=0;           
-			sumY=0;
-			sumX=0;
+			n=0; sumZ=0; sumY=0; sumX=0;
 			
 			//////////////////////////////////////////////////////////////////calculate angles
+			//https://www.digikey.com/en/articles/techzone/2011/may/using-an-accelerometer-for-inclination-sensing
+			
 			pitch= ((atan2(Xavg, sqrt(square(Yavg) + square(Zavg)))*180.0)/M_PI)+pitchOffset;
 			roll = ((atan2(Yavg, sqrt(square(Zavg) + square(Xavg)))*180.0)/M_PI)+rollOffset;
 			yaw = ((atan2(sqrt(square(Yavg) + square(Xavg)), Zavg)*180.0)/M_PI)+yawOffset;
-			//////////////////////////////////////////////////////////////////change display mode depending on device orientation
+			//////////////////////////////////////////////////////////////////change angle display mode depending on device orientation
+			//between 40 and 70 degrees stays in last set mode (hysteresis to prevent from fast changes of display mode)
 			if(abs(roll)>70){
-				measurementMode=1;
+				measurementMode=1; //on side
 			}
 			if(abs(roll)<40){
-				measurementMode=0;
+				measurementMode=0; //on back
 			}
 			
 			//////////////////////////////////////////////////////////////////WRITE VALUES TO UART
 			USART_WriteDebug(pitch,roll,yaw,measurementMode);
 			
 			//////////////////////////////////////////////////////////////////DRAW LEFT HALF OF SCREEN
+			//sine is used to move a dot faster around 0 degrees which is supposed to give extra accuracy of graphic
 			fb.clear();
-			//fb.drawRectangle(32-5,32-5,32+5,32+5,0);
-			//fb.drawHLine(32,22,10);
-			//fb.drawVLine(32,22,10);
+			if(!measurementMode){
 			fb.drawRectangle(28,28,36,36);
 			fb.drawPixel((int8_t)(sin(pitch*M_PI/180)*32)+32,(sin(roll*M_PI/180)*32)+32);
-			fb.show(0);
+			}else{
+				fb.drawHLine(16,1,63);
+				fb.drawPixel((int8_t)(sin(pitch*M_PI/180)*32)+32,30);
+			}
+			fb.show(0);//draw framebuffer on left side of screen
 		 
 			//////////////////////////////////////////////////////////////////DRAW RIGHT HALF OF SCREEN	
 			fb.clear();
-			fb.show(1);
+			fb.show(1);//draw framebuffer on right side of screen
 			}
 		 
     }
