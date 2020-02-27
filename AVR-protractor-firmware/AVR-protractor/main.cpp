@@ -77,9 +77,9 @@ int main(void)
 		_delay_ms(10);//screen refresh rate is delay*samplesToAvg
 		
 		//////////////////////////////////////////////////////////////////get reading from acc and add it to a sum
-		 oneZ = acc.readAcc(0x2C,0x2D);
-		 oneY= acc.readAcc(0x2A,0x2B);
-		 oneX = acc.readAcc(0x28,0x29);
+		 oneZ = acc.readAcc(OUT_Z_L,OUT_Z_H);
+		 oneY= acc.readAcc(OUT_Y_L,OUT_Y_H);
+		 oneX = acc.readAcc(OUT_X_L,OUT_X_H);
 		 sumZ+=oneZ; 
 		 sumY+=oneY; 
 		 sumX+=oneX; 

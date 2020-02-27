@@ -33,7 +33,7 @@ uint8_t LIS3DH::readReg(uint8_t reg){
 	i2c_acc_w.stop();
 	
 	i2c_acc_r.start();
-	data=i2c_acc_r.readNak();
+	data=i2c_acc_r.readAck();
 	i2c_acc_r.stop();
 	return data;
 	
